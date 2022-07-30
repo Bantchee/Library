@@ -4,7 +4,8 @@ A virtual library that stores books. This is a project from [The Odin Project](<
 ## Features
 * Add book to library
 * Remove book from library
-* Render books in html
+* Edit book in library
+* Render books in html via js
 
 ## Tools
 * HTML
