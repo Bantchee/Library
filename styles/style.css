@@ -1,0 +1,39 @@
+:root {
+    margin: 0;
+    padding: 0;
+
+
+    --yellow: #F5F1C1;
+    --orange: #DF8157;
+    --red: #CD190E;
+    --light-blue: #ACF0F1;
+    --blue: #2EB5CB;
+    --dark-blue: #21527A;
+    --black: #FFF;
+    --white: #000;
+}
+
+body {
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: 4fr 15fr;
+    grid-template-areas: "aside article";
+}
+
+aside {
+    grid-area: aside;
+
+    background-color: var(--orange);
+}
+
+article {
+    grid-area: article;
+
+    background-color: var(--yellow);
+}
