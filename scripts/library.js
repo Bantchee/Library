@@ -56,7 +56,7 @@ function render() {
                 // Create Page Count PopUpText
                 const popUpText = document.createElement('span');
                 popUpText.classList.add('pop-up-text');
-                popUpText.textContent = myLibrary[book].pages;
+                popUpText.textContent = `${myLibrary[book].pages} Pages`;
 
                 // Create Page Count Icon
                 const pageIcon = document.createElement('img');
