@@ -78,10 +78,12 @@ aside .buttons button:hover {
 
 /* ARTICLE */
 article {
-
     grid-area: article;
 
     background-color: var(--yellow);
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 article .book .cover {
