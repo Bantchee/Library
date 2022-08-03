@@ -132,6 +132,8 @@ article .icon-container .icons {
 }
 article .icon-container .div-icon {
     position: relative;
+    align-self: center;
+    justify-self: cneter;
 }
 
 article .icon-container .div-icon .pop-up-text {

@@ -54,41 +54,68 @@ function render() {
             divPage.classList.add('div-page', 'div-icon');
 
                 // Create Page Count PopUpText
-                const popUpText = document.createElement('span');
-                popUpText.classList.add('pop-up-text');
-                popUpText.textContent = `${myLibrary[book].pages} Pages`;
+                const pagePopUpText = document.createElement('span');
+                pagePopUpText.classList.add('pop-up-text');
+                pagePopUpText.textContent = `${myLibrary[book].pages} Pages`;
 
                 // Create Page Count Icon
                 const pageIcon = document.createElement('img');
                 pageIcon.classList.add('page-icon', 'icons');
                 pageIcon.setAttribute('src', 'icons/pages.svg');
                 pageIcon.addEventListener('click', () => {
-                    popUpText.classList.toggle('show');
+                    pagePopUpText.classList.toggle('show');
                 });
 
             divPage.appendChild(pageIcon);
-            divPage.appendChild(popUpText);
+            divPage.appendChild(pagePopUpText);
 
-            // Create Read Icon
-            const readIcon = document.createElement('img');
-            readIcon.classList.add('read-icon', 'icons');
-            readIcon.setAttribute('src', 'icons/read.svg');
+            // Create Read Div
+            const divRead = document.createElement('div');
+            divRead.classList.add('div-read', 'div-icon');
 
-            // Create Edit Icon Button
-            const editIcon = document.createElement('img');
-            editIcon.classList.add('edit-icon', 'icons');
-            editIcon.setAttribute('src', 'icons/edit.svg');
+                // Create Read PopUpText
+                const readPopUpText = document.createElement('span');
+                readPopUpText.classList.add('pop-up-text');
+                readPopUpText.textContent = myLibrary[book].read ? 'Read' : 'Not Read';
 
-            // Create Delete Icon Button
-            const deleteIcon = document.createElement('img');
-            deleteIcon.classList.add('delete-icon', 'icons');
-            deleteIcon.setAttribute('src', 'icons/delete.svg');
+                // Create Read Icon
+                const readIcon = document.createElement('img');
+                readIcon.classList.add('read-icon', 'icons');
+                readIcon.setAttribute('src', myLibrary[book].read ? 'icons/read.svg' : 'icons/not-read.svg');
+                readIcon.addEventListener('click', () => {
+                    readPopUpText.classList.toggle('show');
+                });
 
+            divRead.appendChild(readIcon);
+            divRead.appendChild(readPopUpText);
+
+            // Create Edit Div
+            const divEdit = document.createElement('div');
+            divEdit.classList.add('div-edit', 'div-icon');
+
+                // Create Edit Icon Button
+                const editIcon = document.createElement('img');
+                editIcon.classList.add('edit-icon', 'icons');
+                editIcon.setAttribute('src', 'icons/edit.svg');
+            
+            divEdit.appendChild(editIcon);
+
+            // Create Delete Div
+            const divDelete = document.createElement('div');
+            divDelete.classList.add('div-edit', 'div-icon');
+
+                // Create Delete Icon Button
+                const deleteIcon = document.createElement('img');
+                deleteIcon.classList.add('delete-icon', 'icons');
+                deleteIcon.setAttribute('src', 'icons/delete.svg');
+
+                divDelete.appendChild(deleteIcon);
+            
         // Add Icons to Icon Container
         divIcons.appendChild(divPage);
-        divIcons.appendChild(readIcon);
-        divIcons.appendChild(editIcon);
-        divIcons.appendChild(deleteIcon);
+        divIcons.appendChild(divRead);
+        divIcons.appendChild(divEdit);
+        divIcons.appendChild(divDelete);
 
         // Add Title, Cover, Author to Book
         divBook.appendChild(title);
