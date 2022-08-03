@@ -25,42 +25,52 @@ body {
     display: grid;
     grid-template-rows: 2fr 15fr 2fr;
     grid-template-areas: 
-        "aside"
+        "header"
         "article"
         "footer";
 }
 
-/* ASIDE */
-aside {
+/* header */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    column-gap: 16px;
 
-    grid-area: aside;
+    grid-area: header;
 
     background-color: var(--orange);
     padding: 16px;
 }
 
-aside .logo {
+header .logo a {
     display: flex;
     align-items: center;
+
+    text-decoration: none;
 }
 
-aside .logo a img {
+header .logo a img {
     width: 64px;
     height: 64px;
 }
 
-aside .logo p {
+header .logo a p {
     font-size: 40px;
     padding: 0px;
     margin: 0px;
+    color: var(--black);
 
     font-weight: 500;
 }
 
-aside .buttons button {
+header .buttons {
+    display: flex;
+    justify-content: right;
+    column-gap: 16px;
+}
+
+header .buttons button {
     background-color: var(--yellow);
     opacity: 80%;
     border: 1px solid var(--red);
@@ -72,7 +82,7 @@ aside .buttons button {
     height: 40px;
 }
 
-aside .buttons button:hover {
+header .buttons button:hover {
     opacity: 100%;
 }
 
@@ -81,14 +91,77 @@ article {
     grid-area: article;
 
     background-color: var(--yellow);
+    padding: 20px;
 
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 48px;
+    row-gap: 24px;
+}
+
+article .book {
+    /* border: 1px solid black; */
+    width: 200px;
+    height: 325px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+}
+
+article .book p {
+    padding: 0px;
+    margin: 0px;
 }
 
 article .book .cover {
-    width: 160px;
-    height: 200px
+    width: 100%;
+    height: 250px
+}
+
+article .icon-container {
+    display: flex;
+    column-gap: 8px;
+}
+
+article .icon-container .icons {
+    cursor: pointer;
+}
+article .icon-container .div-icon {
+    position: relative;
+}
+
+article .icon-container .div-icon .pop-up-text {
+    visibility: hidden;
+    position: absolute;
+    background-color: var(--orange);
+    color: var(--yellow);
+    width: 50px;
+    padding: 8px 0px;
+    text-align: center;
+    border-radius: 8px;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -25px;
+}
+
+article .icon-container .div-icon .pop-up-text::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent var(--orange) transparent;
+}
+
+article .icon-container .div-icon .show {
+    visibility: visible;
 }
 
 /* FOOTER */
