@@ -14,5 +14,9 @@ A virtual library that stores books. This is a project from [The Odin Project](<
 * Figma
 * Visual Studio Code
 
+## Future Feature Ideas
+* Search bar
+    * matches text input with the author / title of books in database, then returns those books
+
 ## Third Party
 * [modern-normalize](<https://github.com/sindresorhus/modern-normalize>)
