@@ -110,6 +110,12 @@ function render() {
                 deleteIcon.setAttribute('src', 'icons/delete.svg');
 
                 divDelete.appendChild(deleteIcon);
+                // Deletes a book
+                divDelete.addEventListener('click', () => {
+                    myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
+                    clearArticle();
+                    render();
+                });
             
         // Add Icons to Icon Container
         divIcons.appendChild(divPage);
@@ -128,8 +134,11 @@ function render() {
     }
 }
 
-render();
-
-function myFunction() {
-    console.log("Hello World!")
+// Clears all children in the article section
+function clearArticle() {
+    while (article.firstChild) {
+        article.removeChild(article.firstChild);
+    }
 }
+
+render();
