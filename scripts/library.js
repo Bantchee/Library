@@ -283,6 +283,12 @@ function renderBooks() {
                 readIcon.addEventListener('mouseleave', () => {
                     readPopUpText.classList.toggle('show');
                 });
+                readIcon.addEventListener('click', () => {
+                    myLibrary[book].read = !myLibrary[book].read;
+                    console.log('cool');
+                    clearBooks();
+                    renderBooks();
+                });
             divRead.appendChild(readIcon);
             divRead.appendChild(readPopUpText);
             
