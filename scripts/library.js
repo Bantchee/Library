@@ -5,17 +5,17 @@ addBookToLibrary(new Book("The Institue", "Stephen King", 560, false, "./images/
 addBookToLibrary(new Book("The Rage of Dragons", "Evan Winter", 438, true, "./images/cover-the-rage-of-dragons.jpg"));
 addBookToLibrary(new Book("The Game of Thrones", "George R.R. Martin", 819, false, "./images/cover-the-game-of-thrones.jpg"));
 
-const body = doucment.body;
 const article = document.querySelector('article');
 const addBookBtn = document.querySelector('.add-book');
 
 addBookBtn.addEventListener('click', () => {
-    console.log('Hello World!');
+    renderModal('add-btn');
 });
 
 // Render modal to body
 // IN > OUT : String Object > Undefined
 function renderModal(btnName, book = {}) {
+    console.log(btnName, book);
     // If btnName === 'add-btn'
         // div#modal
             // div.modal-content
@@ -131,12 +131,16 @@ function renderBooks() {
                 const pageIcon = document.createElement('img');
                 pageIcon.classList.add('page-icon', 'icons');
                 pageIcon.setAttribute('src', 'icons/pages.svg');
-                pageIcon.addEventListener('click', () => {
-                    pagePopUpText.classList.toggle('show');
-                });
+                
 
             divPage.appendChild(pageIcon);
             divPage.appendChild(pagePopUpText);
+            divPage.addEventListener('mouseover', () => {
+                pagePopUpText.classList.toggle('show');
+            });
+            divPage.addEventListener('mouseleave', () => {
+                pagePopUpText.classList.toggle('show');
+            });
 
             // Create Read Div
             const divRead = document.createElement('div');
@@ -151,12 +155,16 @@ function renderBooks() {
                 const readIcon = document.createElement('img');
                 readIcon.classList.add('read-icon', 'icons');
                 readIcon.setAttribute('src', myLibrary[book].read ? 'icons/read.svg' : 'icons/not-read.svg');
-                readIcon.addEventListener('click', () => {
-                    readPopUpText.classList.toggle('show');
-                });
+                
 
             divRead.appendChild(readIcon);
             divRead.appendChild(readPopUpText);
+            divRead.addEventListener('mouseover', () => {
+                readPopUpText.classList.toggle('show');
+            });
+            divRead.addEventListener('mouseleave', () => {
+                readPopUpText.classList.toggle('show');
+            });
 
             // Create Edit Div
             const divEdit = document.createElement('div');
@@ -183,7 +191,7 @@ function renderBooks() {
                 divDelete.addEventListener('click', () => {
                     myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
                     clearBooks();
-                    render();
+                    renderBooks();
                 });
             
         // Add Icons to Icon Container
