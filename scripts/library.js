@@ -5,7 +5,74 @@ addBookToLibrary(new Book("The Institue", "Stephen King", 560, false, "./images/
 addBookToLibrary(new Book("The Rage of Dragons", "Evan Winter", 438, true, "./images/cover-the-rage-of-dragons.jpg"));
 addBookToLibrary(new Book("The Game of Thrones", "George R.R. Martin", 819, false, "./images/cover-the-game-of-thrones.jpg"));
 
+const body = doucment.body;
 const article = document.querySelector('article');
+const addBookBtn = document.querySelector('.add-book');
+
+addBookBtn.addEventListener('click', () => {
+    console.log('Hello World!');
+});
+
+// Render modal to body
+// IN > OUT : String Object > Undefined
+function renderModal(btnName, book = {}) {
+    // If btnName === 'add-btn'
+        // div#modal
+            // div.modal-content
+                // span.close
+                    // clearModal()
+                
+                // label.title
+                // input.title
+                
+                // label.author
+                // input.author
+
+                // label.pages
+                // input.pages
+                
+                // label.image URL
+                // input.image URL
+
+                // input(check box).read?
+
+                // button 'Add Book';
+                    // addEventListener 
+                        // add book to myLibrary
+                        // clearModal()
+    // Else
+        // div#modal
+            // div.modal-content
+                // span.close
+                    // clearModal()
+                
+                // label.title
+                // input.title = book.title
+                
+                // label.author
+                // input.author = book.author
+
+                // label.pages
+                // input.pages = book.pages
+                
+                // label.image URL
+                // input.image URL = book.URL
+
+                // input(check box).read?  = book.read
+
+                // button 'Edit Book';
+                    // addEventListener 
+                        // edit book in myLibrary
+                        // clearModal()
+}
+
+// Clear modal from body
+// IN > OUT : String Object > Undefined
+function clearModal(btnName, book = {}) {
+    article.removeChild('#modal');
+}
+
+
 
 // Book Object Constructor
 function Book(title, author, pages, read, url) {
@@ -20,11 +87,13 @@ function Book(title, author, pages, read, url) {
     }
 }
 
+// Adds a book object to myLibrary array
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-function render() {
+// Renders books in myLibrary array to article section
+function renderBooks() {
     for(let book in myLibrary) {
         // Create Book Card
         const divBook = document.createElement('div');
@@ -113,7 +182,7 @@ function render() {
                 // Deletes a book
                 divDelete.addEventListener('click', () => {
                     myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
-                    clearArticle();
+                    clearBooks();
                     render();
                 });
             
@@ -135,10 +204,10 @@ function render() {
 }
 
 // Clears all children in the article section
-function clearArticle() {
+function clearBooks() {
     while (article.firstChild) {
         article.removeChild(article.firstChild);
     }
 }
 
-render();
+renderBooks();
