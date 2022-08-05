@@ -16,30 +16,147 @@ addBookBtn.addEventListener('click', () => {
 // IN > OUT : String Object > Undefined
 function renderModal(btnName, book = {}) {
     console.log(btnName, book);
-    // If btnName === 'add-btn'
-        // div#modal
-            // div.modal-content
-                // span.close
-                    // clearModal()
-                
+    // create div#modal
+    const divModal = document.createElement('div');
+    divModal.setAttribute('id', 'modal');
+
+        // create div.modal-content
+        const divModalContent = document.createElement('div');
+        divModalContent.classList.add('modal-content');
+
+            // span.close btn
+            const closeBtn = document.createElement('span');
+            closeBtn.classList.add('close');
+            closeBtn.innerHTML = '&times';
+            closeBtn.addEventListener('click', () => {
+                clearModal();
+            });
+            divModalContent.appendChild(closeBtn);
+    
+
+            // Form 
+            const formModal = document.createElement('form');
+
+                // Title
                 // label.title
+                const titleLabel = document.createElement('label');
+                titleLabel.textContent = 'Title:';
+                formModal.appendChild(titleLabel);
+                
                 // input.title
-                
+                const titleInput = document.createElement('input');
+                titleInput.setAttribute('value', btnName === 'add-btn' ? '' : book.title);
+                formModal.appendChild(titleInput);
+
+                // Author
                 // label.author
-                // input.author
-
-                // label.pages
-                // input.pages
+                const authorLabel = document.createElement('label');
+                authorLabel.textContent = 'Author:';
+                formModal.appendChild(authorLabel);
                 
-                // label.image URL
-                // input.image URL
+                // input.author
+                const authorInput = document.createElement('input');
+                authorInput.setAttribute('value', btnName === 'add-btn' ? '' : book.author);
+                formModal.appendChild(authorInput);
 
-                // input(check box).read?
+                // Pages
+                // label.Pages
+                const pagesLabel = document.createElement('label');
+                pagesLabel.textContent = 'Pages:';
+                formModal.appendChild(pagesLabel);
+                
+                // input.Pages
+                const pagesInput = document.createElement('input');
+                pagesInput.setAttribute('value', btnName === 'add-btn' ? '' : book.pages);
+                formModal.appendChild(pagesInput);
+            
+                // Image URL
+                // label.image URL
+                const urlLabel = document.createElement('label');
+                urlLabel.textContent = 'Image URL:';
+                formModal.appendChild(urlLabel);
+                
+                // input.image URL
+                const urlInput = document.createElement('input');
+                urlInput.setAttribute('value', btnName === 'add-btn' ? '' : book.url);
+                formModal.appendChild(urlInput);
+
+                // Input(check box).read?
+                // read? div
+                const divReadModal = document.createElement('div');
+                divReadModal.classList.add('modal-read');
+
+                    // input radio button read
+                    const readInput = document.createElement('input');
+                    readInput.setAttribute('type', 'checkbox');
+                    if(btnName === 'edit-btn' && book.read === true ) {
+                        readInput.setAttribute('checked', 'checked');
+                    } 
+                    divReadModal.appendChild(readInput);
+                    // event listner
+                    readInput.addEventListener('click', () => {
+                        if(readInput.hasAttribute('checked')) {
+                            readInput.removeAttribute('checked');
+                        } else {
+                            readInput.setAttribute('checked', 'checked');
+                        }
+                    });
+
+                    // label read
+                    const readLabel = document.createElement('label');
+                    readLabel.textContent = "Read?"
+                    divReadModal.appendChild(readLabel);
+
+                formModal.appendChild(divReadModal);
 
                 // button 'Add Book';
-                    // addEventListener 
-                        // add book to myLibrary
-                        // clearModal()
+                const modalBtn = document.createElement('button');
+                modalBtn.classList.add('modal-btn');
+                modalBtn.textContent = btnName === 'add-btn' ? 'Add Book' : 'Edit Book';
+                // addEventListener 
+                    // add book to myLibrary
+                    // clearModal()
+                modalBtn.addEventListener('click', (event) => {
+                    if (btnName === 'add-btn') {
+                        addBookToLibrary(new Book(
+                            titleInput.value,
+                            authorInput.value,
+                            pagesInput.value,
+                            urlInput.value,
+                            readInput.hasAttribute('checked')
+                            ));
+                        clearBooks();
+                        renderBooks();
+                    } else {
+                        book.title = titleInput.value;
+                        book.author = authorInput.value;
+                        book.pages = pagesInput.value;
+                        book.url = urlInput.value;
+                        book.read = readInput.hasAttribute('checked');
+                        clearBooks();
+                        renderBooks();
+                    }
+
+                    // This prevents the btn from refreshing browser
+                    event.preventDefault();
+                    clearModal();
+                }); 
+                formModal.appendChild(modalBtn);
+
+            // add form to div.modal-content
+            divModalContent.appendChild(formModal); 
+
+        // add div.modal-content to div#modal
+        divModal.appendChild(divModalContent);
+
+    // add div#modal to document
+    document.body.appendChild(divModal);
+
+    
+        
+    
+        
+            
     // Else
         // div#modal
             // div.modal-content
@@ -69,7 +186,7 @@ function renderModal(btnName, book = {}) {
 // Clear modal from body
 // IN > OUT : String Object > Undefined
 function clearModal(btnName, book = {}) {
-    article.removeChild('#modal');
+    document.body.removeChild(document.querySelector('#modal'));
 }
 
 
