@@ -17,6 +17,9 @@ A virtual library that stores books. This is a project from [The Odin Project](<
 ## Future Feature Ideas
 * Search bar
     * matches text input with the author / title of books in database, then returns those books
+* Log In
+    * Log In using Google account
+* 2D animations
 
 ## Third Party
 * [modern-normalize](<https://github.com/sindresorhus/modern-normalize>)
