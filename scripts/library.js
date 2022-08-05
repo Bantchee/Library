@@ -131,16 +131,19 @@ function renderBooks() {
                 const pageIcon = document.createElement('img');
                 pageIcon.classList.add('page-icon', 'icons');
                 pageIcon.setAttribute('src', 'icons/pages.svg');
+
+                // Mouse over Icon Display Page Count
+                pageIcon.addEventListener('mouseover', () => {
+                    pagePopUpText.classList.toggle('show');
+                });
+                pageIcon.addEventListener('mouseleave', () => {
+                    pagePopUpText.classList.toggle('show');
+                });
                 
 
             divPage.appendChild(pageIcon);
             divPage.appendChild(pagePopUpText);
-            divPage.addEventListener('mouseover', () => {
-                pagePopUpText.classList.toggle('show');
-            });
-            divPage.addEventListener('mouseleave', () => {
-                pagePopUpText.classList.toggle('show');
-            });
+            
 
             // Create Read Div
             const divRead = document.createElement('div');
@@ -156,15 +159,16 @@ function renderBooks() {
                 readIcon.classList.add('read-icon', 'icons');
                 readIcon.setAttribute('src', myLibrary[book].read ? 'icons/read.svg' : 'icons/not-read.svg');
                 
-
+                // Mouse over Icon to display if read or not
+                readIcon.addEventListener('mouseover', () => {
+                    readPopUpText.classList.toggle('show');
+                });
+                readIcon.addEventListener('mouseleave', () => {
+                    readPopUpText.classList.toggle('show');
+                });
             divRead.appendChild(readIcon);
             divRead.appendChild(readPopUpText);
-            divRead.addEventListener('mouseover', () => {
-                readPopUpText.classList.toggle('show');
-            });
-            divRead.addEventListener('mouseleave', () => {
-                readPopUpText.classList.toggle('show');
-            });
+            
 
             // Create Edit Div
             const divEdit = document.createElement('div');
@@ -174,8 +178,27 @@ function renderBooks() {
                 const editIcon = document.createElement('img');
                 editIcon.classList.add('edit-icon', 'icons');
                 editIcon.setAttribute('src', 'icons/edit.svg');
+
+                // Create Edit PopUpText
+                const editPopUpText = document.createElement('span');
+                editPopUpText.classList.add('pop-up-text');
+                editPopUpText.textContent = 'Edit';
+                
+                // Mouse over Icon to display Edit Text
+                editIcon.addEventListener('mouseover', () => {
+                    editPopUpText.classList.toggle('show');
+                });
+                editIcon.addEventListener('mouseleave', () => {
+                    editPopUpText.classList.toggle('show');
+                });
             
             divEdit.appendChild(editIcon);
+            divEdit.appendChild(editPopUpText);
+            
+            // Edit btn
+            divEdit.addEventListener('click', () => {
+                renderModal('edit-btn', myLibrary[book]);
+            });
 
             // Create Delete Div
             const divDelete = document.createElement('div');
@@ -186,13 +209,27 @@ function renderBooks() {
                 deleteIcon.classList.add('delete-icon', 'icons');
                 deleteIcon.setAttribute('src', 'icons/delete.svg');
 
-                divDelete.appendChild(deleteIcon);
-                // Deletes a book
-                divDelete.addEventListener('click', () => {
-                    myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
-                    clearBooks();
-                    renderBooks();
+                // Create Edit PopUpText
+                const deletePopUpText = document.createElement('span');
+                deletePopUpText.classList.add('pop-up-text');
+                deletePopUpText.textContent = 'Delete';
+
+                // Mouse over icon to display Delete Text display
+                deleteIcon.addEventListener('mouseover', () => {
+                    deletePopUpText.classList.toggle('show');
                 });
+                deleteIcon.addEventListener('mouseleave', () => {
+                    deletePopUpText.classList.toggle('show');
+                });
+            divDelete.appendChild(deleteIcon);
+            divDelete.appendChild(deletePopUpText);
+            
+            // Deletes a book
+            divDelete.addEventListener('click', () => {
+                myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
+                clearBooks();
+                renderBooks();
+            });
             
         // Add Icons to Icon Container
         divIcons.appendChild(divPage);
