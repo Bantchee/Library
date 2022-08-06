@@ -12,7 +12,7 @@
 .modal-content {
     background-color: var(--orange);
     width: 500px;
-    height: 500px;
+    height: 600px;
     border: 3px var(--yellow) solid;
     border-radius: 24px;
 
@@ -34,4 +34,17 @@
 form {
     display: flex;
     flex-direction: column;
+    color: var(--yellow);
+    font-size: 24px;
+    row-gap: 10px;
+}
+
+form input {
+    background-color: var(--yellow);
+    border: 3px var(--red) solid;
+    border-radius: 8px;
+}
+
+form input:focus {
+    border: 3px var(--red) solid;
 }

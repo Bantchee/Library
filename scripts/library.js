@@ -46,6 +46,7 @@ function renderModal(btnName, book = {}) {
                 // input.title
                 const titleInput = document.createElement('input');
                 titleInput.setAttribute('value', btnName === 'add-btn' ? '' : book.title);
+                titleInput.setAttribute('required', 'required');
                 formModal.appendChild(titleInput);
 
                 // Author
@@ -138,6 +139,7 @@ function renderModal(btnName, book = {}) {
                     }
 
                     // This prevents the btn from refreshing browser
+                    event.
                     event.preventDefault();
                     clearModal();
                 }); 
@@ -396,3 +398,6 @@ function isArrEqual(arr1, arr2) {
 }
 
 renderBooks();
+
+// Temperay 
+// renderModal('add-btn');
