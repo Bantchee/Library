@@ -46,21 +46,28 @@ header {
 header .logo a {
     display: flex;
     align-items: center;
-
+    color:black;
     text-decoration: none;
+    filter: invert(96%) sepia(35%) saturate(533%) hue-rotate(325deg) brightness(104%) contrast(92%);
+    
 }
+
+header .logo a:hover {
+    filter: invert(19%) sepia(63%) saturate(4829%) hue-rotate(354deg) brightness(80%) contrast(101%);
+    color: var(--red);
+}
+
 
 header .logo a img {
     width: 64px;
     height: 64px;
+    
 }
 
 header .logo a p {
     font-size: 40px;
     padding: 0px;
     margin: 0px;
-    color: var(--black);
-
     font-weight: 500;
 }
 
@@ -85,7 +92,9 @@ header .buttons button {
 }
 
 header .buttons button:hover {
-    opacity: 100%;
+    background-color: var(--red);
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
 }
 
 /* ARTICLE */
@@ -106,6 +115,7 @@ article {
 article > p {
     font-size: 40px;
     font-weight: 600;
+    color: var(--orange);
 }
 
 article .book {
@@ -194,9 +204,15 @@ footer p {
     font-size: 20px;
     padding: 0px;
     margin: 0px;
+    color: var(--yellow);
 }
 
 footer a img {
     width: 32px;
     height: 32px;
+    filter: invert(96%) sepia(35%) saturate(533%) hue-rotate(325deg) brightness(104%) contrast(92%);
+}
+
+footer a img:hover {
+    filter: invert(19%) sepia(63%) saturate(4829%) hue-rotate(354deg) brightness(80%) contrast(101%);
 }
