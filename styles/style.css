@@ -103,6 +103,11 @@ article {
     row-gap: 24px;
 }
 
+article > p {
+    font-size: 40px;
+    font-weight: 600;
+}
+
 article .book {
     /* border: 1px solid black; */
     width: 250px;

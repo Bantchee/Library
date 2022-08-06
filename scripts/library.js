@@ -211,163 +211,170 @@ function addBookToLibrary(book) {
 
 // Renders books in myLibrary array to article section
 function renderBooks() {
-    for(let book in myLibrary) {
-        // Create Book Card
-        const divBook = document.createElement('div');
-        divBook.classList.add('book');
+    if(isArrEmpty(myLibrary, [])) {
+        // Create P element 'Add a Book'
+        const para = document.createElement('p');
+        para.textContent = "Add some books!";
+        article.appendChild(para);
+    } else {
+        for(let book in myLibrary) {
+            // Create Book Card
+            const divBook = document.createElement('div');
+            divBook.classList.add('book');
 
-        // Create Title
-        const title = document.createElement('p');
-        title.classList.add('title');
-        title.textContent = myLibrary[book].title;
+            // Create Title
+            const title = document.createElement('p');
+            title.classList.add('title');
+            title.textContent = myLibrary[book].title;
 
-        // Create Cover
-        const cover = document.createElement('img');
-        cover.classList.add('cover');
-        cover.setAttribute("src", myLibrary[book].url);
+            // Create Cover
+            const cover = document.createElement('img');
+            cover.classList.add('cover');
+            cover.setAttribute("src", myLibrary[book].url);
 
-        // Create Author
-        const author = document.createElement('p');
-        author.classList.add('author');
-        author.textContent = myLibrary[book].author;
+            // Create Author
+            const author = document.createElement('p');
+            author.classList.add('author');
+            author.textContent = myLibrary[book].author;
 
-        // Create Div.Icon-Container
-        const divIcons = document.createElement('d');
-        divIcons.classList.add('icon-container');
+            // Create Div.Icon-Container
+            const divIcons = document.createElement('d');
+            divIcons.classList.add('icon-container');
 
-            // Create Page Div
-            const divPage = document.createElement('div');
-            divPage.classList.add('div-page', 'div-icon');
+                // Create Page Div
+                const divPage = document.createElement('div');
+                divPage.classList.add('div-page', 'div-icon');
 
-                // Create Page Count PopUpText
-                const pagePopUpText = document.createElement('span');
-                pagePopUpText.classList.add('pop-up-text');
-                pagePopUpText.textContent = `${myLibrary[book].pages} Pages`;
+                    // Create Page Count PopUpText
+                    const pagePopUpText = document.createElement('span');
+                    pagePopUpText.classList.add('pop-up-text');
+                    pagePopUpText.textContent = `${myLibrary[book].pages} Pages`;
 
-                // Create Page Count Icon
-                const pageIcon = document.createElement('img');
-                pageIcon.classList.add('page-icon', 'icons');
-                pageIcon.setAttribute('src', 'icons/pages.svg');
+                    // Create Page Count Icon
+                    const pageIcon = document.createElement('img');
+                    pageIcon.classList.add('page-icon', 'icons');
+                    pageIcon.setAttribute('src', 'icons/pages.svg');
 
-                // Mouse over Icon Display Page Count
-                pageIcon.addEventListener('mouseover', () => {
-                    pagePopUpText.classList.toggle('show');
-                });
-                pageIcon.addEventListener('mouseleave', () => {
-                    pagePopUpText.classList.toggle('show');
-                });
+                    // Mouse over Icon Display Page Count
+                    pageIcon.addEventListener('mouseover', () => {
+                        pagePopUpText.classList.toggle('show');
+                    });
+                    pageIcon.addEventListener('mouseleave', () => {
+                        pagePopUpText.classList.toggle('show');
+                    });
+                    
+
+                divPage.appendChild(pageIcon);
+                divPage.appendChild(pagePopUpText);
                 
 
-            divPage.appendChild(pageIcon);
-            divPage.appendChild(pagePopUpText);
-            
+                // Create Read Div
+                const divRead = document.createElement('div');
+                divRead.classList.add('div-read', 'div-icon');
 
-            // Create Read Div
-            const divRead = document.createElement('div');
-            divRead.classList.add('div-read', 'div-icon');
+                    // Create Read PopUpText
+                    const readPopUpText = document.createElement('span');
+                    readPopUpText.classList.add('pop-up-text');
+                    readPopUpText.textContent = myLibrary[book].read ? 'Read' : 'Not Read';
 
-                // Create Read PopUpText
-                const readPopUpText = document.createElement('span');
-                readPopUpText.classList.add('pop-up-text');
-                readPopUpText.textContent = myLibrary[book].read ? 'Read' : 'Not Read';
-
-                // Create Read Icon
-                const readIcon = document.createElement('img');
-                readIcon.classList.add('read-icon', 'icons');
-                readIcon.setAttribute('src', myLibrary[book].read ? 'icons/read.svg' : 'icons/not-read.svg');
+                    // Create Read Icon
+                    const readIcon = document.createElement('img');
+                    readIcon.classList.add('read-icon', 'icons');
+                    readIcon.setAttribute('src', myLibrary[book].read ? 'icons/read.svg' : 'icons/not-read.svg');
+                    
+                    // Mouse over Icon to display if read or not
+                    readIcon.addEventListener('mouseover', () => {
+                        readPopUpText.classList.toggle('show');
+                    });
+                    readIcon.addEventListener('mouseleave', () => {
+                        readPopUpText.classList.toggle('show');
+                    });
+                    readIcon.addEventListener('click', () => {
+                        myLibrary[book].read = !myLibrary[book].read;
+                        console.log('cool');
+                        clearBooks();
+                        renderBooks();
+                    });
+                divRead.appendChild(readIcon);
+                divRead.appendChild(readPopUpText);
                 
-                // Mouse over Icon to display if read or not
-                readIcon.addEventListener('mouseover', () => {
-                    readPopUpText.classList.toggle('show');
+
+                // Create Edit Div
+                const divEdit = document.createElement('div');
+                divEdit.classList.add('div-edit', 'div-icon');
+
+                    // Create Edit Icon Button
+                    const editIcon = document.createElement('img');
+                    editIcon.classList.add('edit-icon', 'icons');
+                    editIcon.setAttribute('src', 'icons/edit.svg');
+
+                    // Create Edit PopUpText
+                    const editPopUpText = document.createElement('span');
+                    editPopUpText.classList.add('pop-up-text');
+                    editPopUpText.textContent = 'Edit';
+                    
+                    // Mouse over Icon to display Edit Text
+                    editIcon.addEventListener('mouseover', () => {
+                        editPopUpText.classList.toggle('show');
+                    });
+                    editIcon.addEventListener('mouseleave', () => {
+                        editPopUpText.classList.toggle('show');
+                    });
+                
+                divEdit.appendChild(editIcon);
+                divEdit.appendChild(editPopUpText);
+                
+                // Edit btn
+                divEdit.addEventListener('click', () => {
+                    renderModal('edit-btn', myLibrary[book]);
                 });
-                readIcon.addEventListener('mouseleave', () => {
-                    readPopUpText.classList.toggle('show');
-                });
-                readIcon.addEventListener('click', () => {
-                    myLibrary[book].read = !myLibrary[book].read;
-                    console.log('cool');
+
+                // Create Delete Div
+                const divDelete = document.createElement('div');
+                divDelete.classList.add('div-edit', 'div-icon');
+
+                    // Create Delete Icon Button
+                    const deleteIcon = document.createElement('img');
+                    deleteIcon.classList.add('delete-icon', 'icons');
+                    deleteIcon.setAttribute('src', 'icons/delete.svg');
+
+                    // Create Edit PopUpText
+                    const deletePopUpText = document.createElement('span');
+                    deletePopUpText.classList.add('pop-up-text');
+                    deletePopUpText.textContent = 'Delete';
+
+                    // Mouse over icon to display Delete Text display
+                    deleteIcon.addEventListener('mouseover', () => {
+                        deletePopUpText.classList.toggle('show');
+                    });
+                    deleteIcon.addEventListener('mouseleave', () => {
+                        deletePopUpText.classList.toggle('show');
+                    });
+                divDelete.appendChild(deleteIcon);
+                divDelete.appendChild(deletePopUpText);
+                
+                // Deletes a book
+                divDelete.addEventListener('click', () => {
+                    myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
                     clearBooks();
                     renderBooks();
                 });
-            divRead.appendChild(readIcon);
-            divRead.appendChild(readPopUpText);
-            
-
-            // Create Edit Div
-            const divEdit = document.createElement('div');
-            divEdit.classList.add('div-edit', 'div-icon');
-
-                // Create Edit Icon Button
-                const editIcon = document.createElement('img');
-                editIcon.classList.add('edit-icon', 'icons');
-                editIcon.setAttribute('src', 'icons/edit.svg');
-
-                // Create Edit PopUpText
-                const editPopUpText = document.createElement('span');
-                editPopUpText.classList.add('pop-up-text');
-                editPopUpText.textContent = 'Edit';
                 
-                // Mouse over Icon to display Edit Text
-                editIcon.addEventListener('mouseover', () => {
-                    editPopUpText.classList.toggle('show');
-                });
-                editIcon.addEventListener('mouseleave', () => {
-                    editPopUpText.classList.toggle('show');
-                });
-            
-            divEdit.appendChild(editIcon);
-            divEdit.appendChild(editPopUpText);
-            
-            // Edit btn
-            divEdit.addEventListener('click', () => {
-                renderModal('edit-btn', myLibrary[book]);
-            });
+            // Add Icons to Icon Container
+            divIcons.appendChild(divPage);
+            divIcons.appendChild(divRead);
+            divIcons.appendChild(divEdit);
+            divIcons.appendChild(divDelete);
 
-            // Create Delete Div
-            const divDelete = document.createElement('div');
-            divDelete.classList.add('div-edit', 'div-icon');
+            // Add Title, Cover, Author to Book
+            divBook.appendChild(title);
+            divBook.appendChild(cover);
+            divBook.appendChild(author);
+            divBook.appendChild(divIcons);
 
-                // Create Delete Icon Button
-                const deleteIcon = document.createElement('img');
-                deleteIcon.classList.add('delete-icon', 'icons');
-                deleteIcon.setAttribute('src', 'icons/delete.svg');
-
-                // Create Edit PopUpText
-                const deletePopUpText = document.createElement('span');
-                deletePopUpText.classList.add('pop-up-text');
-                deletePopUpText.textContent = 'Delete';
-
-                // Mouse over icon to display Delete Text display
-                deleteIcon.addEventListener('mouseover', () => {
-                    deletePopUpText.classList.toggle('show');
-                });
-                deleteIcon.addEventListener('mouseleave', () => {
-                    deletePopUpText.classList.toggle('show');
-                });
-            divDelete.appendChild(deleteIcon);
-            divDelete.appendChild(deletePopUpText);
-            
-            // Deletes a book
-            divDelete.addEventListener('click', () => {
-                myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
-                clearBooks();
-                renderBooks();
-            });
-            
-        // Add Icons to Icon Container
-        divIcons.appendChild(divPage);
-        divIcons.appendChild(divRead);
-        divIcons.appendChild(divEdit);
-        divIcons.appendChild(divDelete);
-
-        // Add Title, Cover, Author to Book
-        divBook.appendChild(title);
-        divBook.appendChild(cover);
-        divBook.appendChild(author);
-        divBook.appendChild(divIcons);
-
-        // Add Book to Article
-        article.appendChild(divBook);   
+            // Add Book to Article
+            article.appendChild(divBook);   
+        }
     }
 }
 
@@ -376,6 +383,16 @@ function clearBooks() {
     while (article.firstChild) {
         article.removeChild(article.firstChild);
     }
+}
+
+// Checks if an array is empty
+function isArrEmpty(arr) {
+    return isArrEqual(arr, []);
+}
+
+// Compares two arrays and returns boolean value if they are equal
+function isArrEqual(arr1, arr2) {
+    return arr1.join() == arr2.join();
 }
 
 renderBooks();
