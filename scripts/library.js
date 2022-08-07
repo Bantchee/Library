@@ -161,8 +161,6 @@ function clearModal(btnName, book = {}) {
     document.body.removeChild(document.querySelector('#modal'));
 }
 
-
-
 // Book Object Constructor
 function Book(title, author, pages, read, url) {
     this.title = title;     // String
