@@ -1,9 +1,10 @@
 let myLibrary = [];
 
-// addBookToLibrary(new Book("The Name of the Wind", "Patrick Rothfuss", 662, true, "./images/cover-the-name-of-the-wind.jpg"));
-// addBookToLibrary(new Book("The Institue", "Stephen King", 560, false, "./images/cover-the-institue.jpg"));
-// addBookToLibrary(new Book("The Rage of Dragons", "Evan Winter", 438, true, "./images/cover-the-rage-of-dragons.jpg"));
-// addBookToLibrary(new Book("The Game of Thrones", "George R.R. Martin", 819, false, "./images/cover-the-game-of-thrones.jpg"));
+addBookToLibrary(new Book("The Name of the Wind", "Patrick Rothfuss", 662, true, "./images/cover-the-name-of-the-wind.jpg"));
+addBookToLibrary(new Book("The Name of the Wind", "Patrick Rothfuss", 662, true, "./images/cover-the-name-of-the-wind.jpg"));
+addBookToLibrary(new Book("The Institue", "Stephen King", 560, false, "./images/cover-the-institue.jpg"));
+addBookToLibrary(new Book("The Rage of Dragons", "Evan Winter", 438, true, "./images/cover-the-rage-of-dragons.jpg"));
+addBookToLibrary(new Book("The Game of Thrones", "George R.R. Martin", 819, false, "./images/cover-the-game-of-thrones.jpg"));
 
 const article = document.querySelector('article');
 const addBookBtn = document.querySelector('.add-book');
@@ -152,36 +153,6 @@ function renderModal(btnName, book = {}) {
 
     // add div#modal to document
     document.body.appendChild(divModal);
-
-    
-        
-    
-        
-            
-    // Else
-        // div#modal
-            // div.modal-content
-                // span.close
-                    // clearModal()
-                
-                // label.title
-                // input.title = book.title
-                
-                // label.author
-                // input.author = book.author
-
-                // label.pages
-                // input.pages = book.pages
-                
-                // label.image URL
-                // input.image URL = book.URL
-
-                // input(check box).read?  = book.read
-
-                // button 'Edit Book';
-                    // addEventListener 
-                        // edit book in myLibrary
-                        // clearModal()
 }
 
 // Clear modal from body
@@ -199,10 +170,16 @@ function Book(title, author, pages, read, url) {
     this.pages = pages;     // Number
     this.read = read;       // Boolean
     this.url = url;         // String
+    this.id = generateRandomId();
 
     this.info = () => {
         return `${title} by ${author}, ${pages} pages, ${(read) ? "have read": "not read yet"}`;
     }
+}
+
+// Generates a random id number for book
+function generateRandomId() {
+    return Math.random();
 }
 
 // Adds a book object to myLibrary array
@@ -356,7 +333,7 @@ function renderBooks() {
                 
                 // Deletes a book
                 divDelete.addEventListener('click', () => {
-                    myLibrary = myLibrary.filter(b => b.title !== myLibrary[book].title);
+                    myLibrary = myLibrary.filter(b => b.id !== myLibrary[book].id);
                     clearBooks();
                     renderBooks();
                 });
