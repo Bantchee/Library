@@ -48,3 +48,26 @@ form input {
 form input:focus {
     border: 3px var(--red) solid;
 }
+
+form .modal-read {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+
+form .modal-btn {
+    cursor: pointer;
+    color: var(--red);
+    background-color: var(--yellow);
+    border: 3px var(--red) solid;
+    border-radius: 8px;
+    width: 160px;
+    align-self: center;
+}
+
+form .modal-btn:hover {
+    color: var(--yellow);
+    background-color: var(--red);
+    border: 3px var(--yellow) solid;
+}

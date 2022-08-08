@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 
+    --max-book-width: 250px;
+    --max-book-cover-width: 200px;
+
     --yellow: #F5F1C1;
     --orange: #DF8157;
     --red: #CD190E;
@@ -120,8 +123,11 @@ article > p {
 
 article .book {
     /* border: 1px solid black; */
-    width: 250px;
-    height: 375px;
+    /* width: 250px;
+    height: 375px; */
+    width: var(--max-book-width);
+
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
@@ -137,11 +143,14 @@ article .book {
 article .book p {
     padding: 0px;
     margin: 0px;
+    color: var(--yellow);
+    width: var(--max-book-cover-width);
+    text-align: center;
 }
 
 article .book .cover {
-    width: 200px;
-    height: 250px
+    width: var(--max-book-cover-width);
+    height: 250px;
 }
 
 article .icon-container {
@@ -151,7 +160,13 @@ article .icon-container {
 
 article .icon-container .icons {
     cursor: pointer;
+    filter: invert(96%) sepia(35%) saturate(533%) hue-rotate(325deg) brightness(104%) contrast(92%);
 }
+
+article .icon-container .icons:hover {
+    filter: invert(19%) sepia(63%) saturate(4829%) hue-rotate(354deg) brightness(80%) contrast(101%);
+}
+
 article .icon-container .div-icon {
     position: relative;
     align-self: center;
