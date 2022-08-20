@@ -17,7 +17,7 @@ A virtual library that stores books. This is a project from [The Odin Project](<
 
 ## Future Feature Ideas
 * Book Id
-    * Generate random Id for books
+    * Use the array index of a book as its id
 * Book Id deletion
 * Search bar
     * matches text input with the author / title of books in database, then returns those books
