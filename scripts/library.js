@@ -1,5 +1,34 @@
 let myLibrary = [];
 
+// Book Object Constructor
+// function Book(title, author, pages, read, url) {
+//     this.title = title;     // String
+//     this.author = author;   // String
+//     this.pages = pages;     // Number
+//     this.read = read;       // Boolean
+//     this.url = url;         // String
+//     this.id = generateRandomId();
+
+//     this.info = () => {
+//         return `${title} by ${author}, ${pages} pages, ${(read) ? "have read": "not read yet"}`;
+//     }
+// }
+
+// Book Class
+class Book {
+    constructor(title, author, pages, read, url) {
+        this.title = title;     // String
+        this.author = author;   // String
+        this.pages = pages;     // Number
+        this.read = read;       // Boolean
+        this.url = url;         // String
+    }
+
+    info = () => {
+        return `${this.title} by ${this.author}, ${this.pages} pages, ${(this.read) ? "have read": "not read yet"}`
+    }
+}
+
 // addBookToLibrary(new Book("The Name of the Wind", "Patrick Rothfuss", 662, true, "./images/cover-the-name-of-the-wind.jpg"));
 // addBookToLibrary(new Book("The Institue", "Stephen King", 560, false, "./images/cover-the-institue.jpg"));
 // addBookToLibrary(new Book("The Rage of Dragons", "Evan Winter", 438, true, "./images/cover-the-rage-of-dragons.jpg"));
@@ -158,20 +187,6 @@ function renderModal(btnName, book = {}) {
 // IN > OUT : String Object > Undefined
 function clearModal(btnName, book = {}) {
     document.body.removeChild(document.querySelector('#modal'));
-}
-
-// Book Object Constructor
-function Book(title, author, pages, read, url) {
-    this.title = title;     // String
-    this.author = author;   // String
-    this.pages = pages;     // Number
-    this.read = read;       // Boolean
-    this.url = url;         // String
-    this.id = generateRandomId();
-
-    this.info = () => {
-        return `${title} by ${author}, ${pages} pages, ${(read) ? "have read": "not read yet"}`;
-    }
 }
 
 // Generates a random id number for book
