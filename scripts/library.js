@@ -65,63 +65,83 @@ function renderModal(btnName, book = {}) {
 
             // Form 
             const formModal = document.createElement('form');
+            formModal.setAttribute('novalidate', 'novalidate');
 
                 // Title
                 // label.title
                 const titleLabel = document.createElement('label');
                 titleLabel.textContent = 'Title:';
+                titleLabel.setAttribute('for', 'title');
                 formModal.appendChild(titleLabel);
                 
                 // input.title
                 const titleInput = document.createElement('input');
                 titleInput.setAttribute('value', btnName === 'add-btn' ? '' : book.title);
                 titleInput.setAttribute('required', 'required');
+                titleInput.setAttribute('id', 'title');
+                titleInput.setAttribute('name', 'title');
                 formModal.appendChild(titleInput);
 
                 // Author
                 // label.author
                 const authorLabel = document.createElement('label');
                 authorLabel.textContent = 'Author:';
+                authorLabel.setAttribute('for', 'author');
                 formModal.appendChild(authorLabel);
                 
                 // input.author
                 const authorInput = document.createElement('input');
                 authorInput.setAttribute('value', btnName === 'add-btn' ? '' : book.author);
+                authorInput.setAttribute('id', 'author');
+                authorInput.setAttribute('name', 'author');
                 formModal.appendChild(authorInput);
 
                 // Pages
                 // label.Pages
                 const pagesLabel = document.createElement('label');
                 pagesLabel.textContent = 'Pages:';
+                pagesLabel.setAttribute('for', 'pages');
                 formModal.appendChild(pagesLabel);
                 
                 // input.Pages
                 const pagesInput = document.createElement('input');
                 pagesInput.setAttribute('value', btnName === 'add-btn' ? '' : book.pages);
+                pagesInput.setAttribute('id', 'pages');
+                pagesInput.setAttribute('name', 'pages');
                 formModal.appendChild(pagesInput);
             
                 // Image URL
                 // label.image URL
                 const urlLabel = document.createElement('label');
                 urlLabel.textContent = 'Image URL:';
+                urlLabel.setAttribute('for', 'img-url');
                 formModal.appendChild(urlLabel);
                 
                 // input.image URL
                 const urlInput = document.createElement('input');
                 urlInput.setAttribute('value', btnName === 'add-btn' ? '' : book.url);
+                urlInput.setAttribute('id', 'img-url');
+                urlInput.setAttribute('name', 'img-url');
                 formModal.appendChild(urlInput);
 
                 // Input(check box).read?
                 // read? div
                 const divReadModal = document.createElement('div');
                 divReadModal.classList.add('modal-read');
+                    // label read
+                    const readLabel = document.createElement('label');
+                    readLabel.textContent = "Read?: "
+                    readLabel.setAttribute('for', 'read');
+                    divReadModal.appendChild(readLabel);
 
                     // input radio button read
                     const readInput = document.createElement('input');
                     readInput.setAttribute('type', 'checkbox');
                     if(btnName === 'edit-btn' && book.read === true ) {
                         readInput.setAttribute('checked', 'checked');
-                    } 
+                    };
+                    readInput.setAttribute('id', 'read');
+                    readInput.setAttribute('name', 'read');
                     divReadModal.appendChild(readInput);
                     // event listner
                     readInput.addEventListener('click', () => {
@@ -132,17 +152,12 @@ function renderModal(btnName, book = {}) {
                         }
                     });
 
-                    // label read
-                    const readLabel = document.createElement('label');
-                    readLabel.textContent = "Read?"
-                    divReadModal.appendChild(readLabel);
-
                 formModal.appendChild(divReadModal);
 
                 // button 'Add Book';
                 const modalBtn = document.createElement('button');
                 modalBtn.classList.add('modal-btn');
-                modalBtn.textContent = btnName === 'add-btn' ? 'Add Book' : 'Edit Book';
+                modalBtn.textContent = (btnName === 'add-btn') ? 'Add Book' : 'Edit Book';
                 // addEventListener 
                     // add book to myLibrary
                     // clearModal()
@@ -181,6 +196,8 @@ function renderModal(btnName, book = {}) {
 
     // add div#modal to document
     document.body.appendChild(divModal);
+
+    updateForm();
 }
 
 // Clear modal from body
@@ -366,6 +383,34 @@ function renderBooks() {
             article.appendChild(divBook);   
         }
     }
+}
+
+// Update state of add book form
+const updateForm = () => {
+    // Get Form
+    const form = document.querySelector('div.modal-content form');
+
+    // Get Inputs : Title, Author, Pages, Img-Url, Read
+    const titleInput = form.querySelector('#title');
+    console.log(titleInput);
+
+    // Get Submit button : add-btn / edit-btn
+
+    //  For each Input
+        // Add Event Listner that checks if value is valid each time a key is pressed
+    titleInput.addEventListener('keydown', () => {
+        
+    });
+    
+    
+    // Form Event Listner
+        // If all Input valid
+            // allow submition
+        // else
+            // prevent submition
+    
+
+
 }
 
 // Clears all children in the article section
