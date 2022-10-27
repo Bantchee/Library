@@ -22,6 +22,7 @@ class Book {
         this.pages = pages;     // Number
         this.read = read;       // Boolean
         this.url = url;         // String
+        this.id = generateRandomId();
     }
 
     info = () => {
@@ -399,7 +400,7 @@ const updateForm = () => {
     //  For each Input
         // Add Event Listner that checks if value is valid each time a key is pressed
     titleInput.addEventListener('keydown', () => {
-        
+
     });
     
     
