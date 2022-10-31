@@ -41,12 +41,12 @@ form {
 
 form input {
     background-color: var(--yellow);
-    border: 3px var(--red) solid;
+    border: 3px solid;
     border-radius: 8px;
 }
 
 form input:focus {
-    border: 3px var(--red) solid;
+    border: 3px var(--black) solid;
 }
 
 form .modal-read {
@@ -60,7 +60,7 @@ form .modal-btn {
     cursor: pointer;
     color: var(--red);
     background-color: var(--yellow);
-    border: 3px var(--red) solid;
+    border: 3px solid;
     border-radius: 8px;
     width: 160px;
     align-self: center;
@@ -70,4 +70,12 @@ form .modal-btn:hover {
     color: var(--yellow);
     background-color: var(--red);
     border: 3px var(--yellow) solid;
+}
+
+.valid {
+    border-color: green;
+}
+
+.invalid {
+    border-color: var(--red);
 }
