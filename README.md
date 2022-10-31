@@ -25,5 +25,8 @@ A virtual library that stores books. This is a project from [The Odin Project](<
     * Log In using Google account
 * 2D animations
 
+## Bugs
+* Added js validation, but that broke the editing btn of books
+
 ## Third Party
 * [modern-normalize](<https://github.com/sindresorhus/modern-normalize>)

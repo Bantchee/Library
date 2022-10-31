@@ -81,6 +81,8 @@ function renderModal(btnName, book = {}) {
                 titleInput.setAttribute('required', 'required');
                 titleInput.setAttribute('id', 'title');
                 titleInput.setAttribute('name', 'title');
+                titleInput.setAttribute('required', 'required');
+                titleInput.classList.add('invalid');
                 formModal.appendChild(titleInput);
 
                 // Author
@@ -95,6 +97,7 @@ function renderModal(btnName, book = {}) {
                 authorInput.setAttribute('value', btnName === 'add-btn' ? '' : book.author);
                 authorInput.setAttribute('id', 'author');
                 authorInput.setAttribute('name', 'author');
+                authorInput.classList.add('invalid');
                 formModal.appendChild(authorInput);
 
                 // Pages
@@ -109,6 +112,7 @@ function renderModal(btnName, book = {}) {
                 pagesInput.setAttribute('value', btnName === 'add-btn' ? '' : book.pages);
                 pagesInput.setAttribute('id', 'pages');
                 pagesInput.setAttribute('name', 'pages');
+                pagesInput.classList.add('invalid');
                 formModal.appendChild(pagesInput);
             
                 // Image URL
@@ -123,6 +127,7 @@ function renderModal(btnName, book = {}) {
                 urlInput.setAttribute('value', btnName === 'add-btn' ? '' : book.url);
                 urlInput.setAttribute('id', 'img-url');
                 urlInput.setAttribute('name', 'img-url');
+                urlInput.classList.add('invalid');
                 formModal.appendChild(urlInput);
 
                 // Input(check box).read?
@@ -138,6 +143,7 @@ function renderModal(btnName, book = {}) {
                     // input radio button read
                     const readInput = document.createElement('input');
                     readInput.setAttribute('type', 'checkbox');
+                    readInput.classList.add('invalid');
                     if(btnName === 'edit-btn' && book.read === true ) {
                         readInput.setAttribute('checked', 'checked');
                     };
@@ -162,31 +168,31 @@ function renderModal(btnName, book = {}) {
                 // addEventListener 
                     // add book to myLibrary
                     // clearModal()
-                modalBtn.addEventListener('click', (event) => {
-                    if (btnName === 'add-btn') {
-                        addBookToLibrary(new Book(
-                            titleInput.value,
-                            authorInput.value,
-                            pagesInput.value,
-                            urlInput.value,
-                            readInput.hasAttribute('checked')
-                            ));
-                        clearBooks();
-                        renderBooks();
-                    } else {
-                        book.title = titleInput.value;
-                        book.author = authorInput.value;
-                        book.pages = pagesInput.value;
-                        book.url = urlInput.value;
-                        book.read = readInput.hasAttribute('checked');
-                        clearBooks();
-                        renderBooks();
-                    }
+                // modalBtn.addEventListener('click', (event) => {
+                    // if (btnName === 'add-btn') {
+                    //     addBookToLibrary(new Book(
+                    //         titleInput.value,
+                    //         authorInput.value,
+                    //         pagesInput.value,
+                    //         urlInput.value,
+                    //         readInput.hasAttribute('checked')
+                    //         ));
+                    //     clearBooks();
+                    //     renderBooks();
+                    // } else {
+                    //     book.title = titleInput.value;
+                    //     book.author = authorInput.value;
+                    //     book.pages = pagesInput.value;
+                    //     book.url = urlInput.value;
+                    //     book.read = readInput.hasAttribute('checked');
+                    //     clearBooks();
+                    //     renderBooks();
+                    // }
 
-                    // This prevents the btn from refreshing browser
-                    event.preventDefault();
-                    clearModal();
-                }); 
+                //     // This prevents the btn from refreshing browser
+                //     event.preventDefault();
+                //     clearModal();
+                // }); 
                 formModal.appendChild(modalBtn);
 
             // add form to div.modal-content
@@ -393,25 +399,122 @@ const updateForm = () => {
 
     // Get Inputs : Title, Author, Pages, Img-Url, Read
     const titleInput = form.querySelector('#title');
-    console.log(titleInput);
+    const authorInput = form.querySelector('#author');
+    const pagesInput = form.querySelector('#pages');
+    const imgUrlInput = form.querySelector("#img-url");
+    const readInput = form.querySelector('#read');
 
     // Get Submit button : add-btn / edit-btn
+    const submitBtn = form.querySelector('button');
 
     //  For each Input
         // Add Event Listner that checks if value is valid each time a key is pressed
     titleInput.addEventListener('keydown', () => {
+        let inputVal = titleInput.value;
 
+        let titleIsValid = inputVal.length > 0;
+
+        if (titleIsValid) {
+            titleInput.classList.add('valid');
+            titleInput.classList.remove('invalid');
+        } else {
+            titleInput.classList.add('invalid');
+            titleInput.classList.remove('valid');
+        }
+    });
+
+    authorInput.addEventListener('keydown', () => {
+        let authorVal = authorInput.value;
+
+        let authorIsValid = authorVal.length > 0;
+
+        if (authorIsValid) {
+            authorInput.classList.add('valid');
+            authorInput.classList.remove('invalid');
+        } else {
+            authorInput.classList.add('invalid');
+            authorInput.classList.remove('valid');
+        }
+    });
+
+    pagesInput.addEventListener('keydown', () => {
+        let pagesVal = pagesInput.value;
+
+        let pagesIsValid = /^\d+$/.test(pagesVal);
+
+        if (pagesIsValid) {
+            pagesInput.classList.add('valid');
+            pagesInput.classList.remove('invalid');
+        } else {
+            pagesInput.classList.add('invalid');
+            pagesInput.classList.remove('valid');
+        }
+    });
+
+    imgUrlInput.addEventListener('keydown', () => {
+        let imgUrlVal = imgUrlInput.value;
+
+        // Check for Img file extentions at end:
+        // .jpg, .jpeg, .png, .gif,
+        let imgUrlIsValid = /[.jpg]$/.test(imgUrlVal) 
+            || /[.jpeg]$/.test(imgUrlVal)
+            || /[.png]$/.test(imgUrlVal)
+            || /[.gif]$/.test(imgUrlVal);
+
+        if (imgUrlIsValid) {
+            imgUrlInput.classList.add('valid');
+            imgUrlInput.classList.remove('invalid');
+        } else {
+            imgUrlInput.classList.add('invalid');
+            imgUrlInput.classList.remove('valid');
+        }
     });
     
-    
+    form.addEventListener('submit', (event) => {
+        let formIsValid = titleInput.classList.contains('valid')
+            && authorInput.classList.contains('valid')
+            && pagesInput.classList.contains('valid')
+            && imgUrlInput.classList.contains('valid');
+        if(formIsValid) {
+            console.log("Form is valid");
+            if (submitBtn.value = 'Add Book') {
+                event.preventDefault();
+                addBookToLibrary(new Book(
+                    titleInput.value,
+                    authorInput.value,
+                    pagesInput.value,
+                    imgUrlInput.value,
+                    readInput.hasAttribute('checked')
+                    ));
+                clearBooks();
+                renderBooks();
+                clearModal();
+            } 
+            else {
+                
+                // // get book
+                // const book = myLibrary[getChildIndex()];
+
+                // book.title = titleInput.value;
+                // book.author = authorInput.value;
+                // book.pages = pagesInput.value;
+                // book.url = imgUrlInput.value;
+                // book.read = readInput.hasAttribute('checked');
+                // clearBooks();
+                // renderBooks();
+            }
+        } 
+        else {
+            event.preventDefault();
+            console.log("Form is not valid");
+        }
+        
+    });
     // Form Event Listner
         // If all Input valid
             // allow submition
         // else
             // prevent submition
-    
-
-
 }
 
 // Clears all children in the article section
